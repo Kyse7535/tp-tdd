@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class DrivingLicenceCreationServiceTest {
     @InjectMocks
-    private DrivingLicenceFinderService service;
+    private DrivingLicenceCreationService service;
 
     @Mock
     private InMemoryDatabase database;
@@ -21,7 +21,7 @@ public class DrivingLicenceCreationServiceTest {
     @Test
     public void should_have_valid_social_number() {
         String social_securiy_number = "123456789101112";
-        Assertions.assertTrue(true,service.check_ss(social_securiy_number));
+        Assertions.assertTrue(() -> service.check_ss(social_securiy_number));
     }
 
     @Test
@@ -37,19 +37,19 @@ public class DrivingLicenceCreationServiceTest {
     @Test
     public void should_not_be_null() {
         String social_securiy_number = "";
-        Assertions.assertThrows(InvalidDriverSocialSecurityNumberException.class,service.check_ss(social_securiy_number));
+        Assertions.assertThrows(InvalidDriverSocialSecurityNumberException.class,() -> service.check_ss(social_securiy_number));
     }
 
     @Test
     public void should_contain_only_digits() {
         String social_securiy_number = "aaaaaaaaaaaaaaa";
-        Assertions.assertThrows(InvalidDriverSocialSecurityNumberException.class,service.check_ss(social_securiy_number));
+        Assertions.assertThrows(InvalidDriverSocialSecurityNumberException.class,() -> service.check_ss(social_securiy_number));
     }
 
     @Test
     public void should_have_15_digits() {
         String social_securiy_number = "11111";
-        Assertions.assertThrows(InvalidDriverSocialSecurityNumberException.class,service.check_ss(social_securiy_number));
+        Assertions.assertThrows(InvalidDriverSocialSecurityNumberException.class,() -> service.check_ss(social_securiy_number));
     }
 
 
