@@ -16,8 +16,8 @@ public class DrivingLicenceCreationService {
     private final InMemoryDatabase database;
 
     public boolean check_ss(String social_securiy_number) {
-        Pattern p = Pattern.compile(social_securiy_number);
-        Matcher m = p.matcher("[0-9]{15}");
+        Pattern p = Pattern.compile("[0-9]{15}");
+        Matcher m = p.matcher(social_securiy_number);
         if(!m.find()) {
             throw new InvalidDriverSocialSecurityNumberException("taille incorrecte");
         }
