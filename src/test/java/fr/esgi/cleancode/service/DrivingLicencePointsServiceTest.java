@@ -2,7 +2,6 @@ package fr.esgi.cleancode.service;
 
 import fr.esgi.cleancode.database.InMemoryDatabase;
 import fr.esgi.cleancode.exception.ResourceNotFoundException;
-import fr.esgi.cleancode.model.DrivingLicence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,7 @@ import java.util.UUID;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class DrivingLicencePointsService {
+public class DrivingLicencePointsServiceTest {
 
     @InjectMocks
     private DrivingLicencePointsService service;
@@ -34,11 +33,7 @@ public class DrivingLicencePointsService {
         when(database.findById(id)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(ResourceNotFoundException.class,() -> service.retirer(id,nbr_points));
-
-
-
     }
-
 
 
 }

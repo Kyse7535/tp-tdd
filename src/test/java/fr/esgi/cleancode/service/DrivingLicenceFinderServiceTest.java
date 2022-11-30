@@ -45,8 +45,8 @@ class DrivingLicenceFinderServiceTest {
     @Test
     void should_not_find() {
         // BEFORE
-        DrivingLicence drivingLicence = DrivingLicence.builder().driverSocialSecurityNumber("111111111111111").build();
-        UUID id = drivingLicence.getId();
+
+        UUID id = UUID.randomUUID();
 
         // EXECUTE
         when(database.findById(id)).thenReturn(Optional.empty());
