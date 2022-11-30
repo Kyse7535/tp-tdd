@@ -1,6 +1,7 @@
 package fr.esgi.cleancode.service;
 
 import fr.esgi.cleancode.database.InMemoryDatabase;
+import fr.esgi.cleancode.exception.ResourceNotFoundException;
 import fr.esgi.cleancode.model.DrivingLicence;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +12,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class DrivingLicenceFinderServiceTest {
@@ -26,13 +30,16 @@ class DrivingLicenceFinderServiceTest {
         //BEFORE
         DrivingLicence drivingLicence = DrivingLicence.builder().driverSocialSecurityNumber("111111111111111").build();
         UUID id = drivingLicence.getId();
-        database.save(drivingLicence.getId(),drivingLicence);
+
 
         // EXECUTE
+        when(database.findById(id)).thenReturn(Optional.of(drivingLicence));
         Optional<DrivingLicence> opt = service.findById(drivingLicence.getId());
 
         // ASSERT
-        Assertions.assertEquals(opt.get(),drivingLicence);
+        assertThat(opt).contains(drivingLicence);
+        verify(database).findById(id);
+        verifyNoMoreInteractions(database);
     }
 
     @Test
@@ -42,9 +49,9 @@ class DrivingLicenceFinderServiceTest {
         UUID id = drivingLicence.getId();
 
         // EXECUTE
-        Optional<DrivingLicence> opt = service.findById(id);
+        when(database.findById(id)).thenReturn(Optional.empty());
 
         // ASSERT
-        Assertions.assertNotEquals(opt.get(),drivingLicence);
+        Assertions.assertEquals(Optional.empty(),service.findById(id));
     }
 }

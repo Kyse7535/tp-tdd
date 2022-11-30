@@ -26,7 +26,7 @@ public class DrivingLicenceCreationService {
 
     public DrivingLicence create(String social_securiy_number)  {
         UUID id = UUID.randomUUID();
-        return new DrivingLicence(id,social_securiy_number);
+        return DrivingLicence.builder().driverSocialSecurityNumber(social_securiy_number).build();
     }
 
 }

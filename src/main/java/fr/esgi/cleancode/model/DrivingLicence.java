@@ -17,8 +17,4 @@ public class DrivingLicence {
     @Default
     int availablePoints = 12;
 
-    public DrivingLicence(UUID id, String driverSocialSecurityNumber) {
-        this.id = id;
-        this.driverSocialSecurityNumber = driverSocialSecurityNumber;
-    }
 }
