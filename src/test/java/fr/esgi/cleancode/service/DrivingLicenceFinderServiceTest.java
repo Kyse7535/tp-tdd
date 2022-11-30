@@ -24,7 +24,7 @@ class DrivingLicenceFinderServiceTest {
     @Test
     void should_find() {
         //BEFORE
-        DrivingLicence drivingLicence = service.create("12345");
+        DrivingLicence drivingLicence = DrivingLicence.builder().driverSocialSecurityNumber("111111111111111").build();
         UUID id = drivingLicence.getId();
         database.save(drivingLicence.getId(),drivingLicence);
 
@@ -38,7 +38,7 @@ class DrivingLicenceFinderServiceTest {
     @Test
     void should_not_find() {
         // BEFORE
-        DrivingLicence drivingLicence = service.create("12345");
+        DrivingLicence drivingLicence = DrivingLicence.builder().driverSocialSecurityNumber("111111111111111").build();
         UUID id = drivingLicence.getId();
 
         // EXECUTE
