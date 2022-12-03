@@ -39,7 +39,11 @@ public class DrivingLicencePointsServiceTest {
     @Test
     public void retirerPoints() {
         DrivingLicence licence = DrivingLicence.builder().driverSocialSecurityNumber("111111111111111").build();
-        Assertions.assertEquals(10,service.retirer(licence.getId(),2).getAvailablePoints());
+
+        when(database.findById(licence.getId())).thenReturn(Optional.of(licence));
+        Optional<DrivingLicence> opt = finderService.findById(licence.getId());
+
+        Assertions.assertEquals(10,service.retirer(opt.get().getId(),2).getAvailablePoints());
     }
 
 
