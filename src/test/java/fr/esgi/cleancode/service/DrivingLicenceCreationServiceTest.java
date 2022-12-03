@@ -21,7 +21,7 @@ public class DrivingLicenceCreationServiceTest {
 
     @Test
     public void should_have_valid_social_number() {
-        String social_securiy_number = "123456789101112";
+        String social_securiy_number = "123456789101111";
         Assertions.assertTrue(() -> service.check_ss(social_securiy_number));
     }
 

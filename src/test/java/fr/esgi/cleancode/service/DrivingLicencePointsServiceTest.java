@@ -2,6 +2,7 @@ package fr.esgi.cleancode.service;
 
 import fr.esgi.cleancode.database.InMemoryDatabase;
 import fr.esgi.cleancode.exception.ResourceNotFoundException;
+import fr.esgi.cleancode.model.DrivingLicence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,6 +34,12 @@ public class DrivingLicencePointsServiceTest {
         when(database.findById(id)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(ResourceNotFoundException.class,() -> service.retirer(id,nbr_points));
+    }
+
+    @Test
+    public void retirerPoints() {
+        DrivingLicence licence = DrivingLicence.builder().driverSocialSecurityNumber("111111111111111").build();
+        Assertions.assertEquals(10,service.retirer(licence.getId(),2).getAvailablePoints());
     }
 
 
