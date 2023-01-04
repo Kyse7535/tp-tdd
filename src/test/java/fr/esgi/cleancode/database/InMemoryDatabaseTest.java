@@ -3,11 +3,14 @@ package fr.esgi.cleancode.database;
 import fr.esgi.cleancode.model.DrivingLicence;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(MockitoExtension.class)
 class InMemoryDatabaseTest {
 
     private final InMemoryDatabase db = InMemoryDatabase.getInstance();

@@ -44,6 +44,7 @@ public class DrivingLicencePointsServiceTest {
         Optional<DrivingLicence> opt = finderService.findById(licence.getId());
 
         Assertions.assertEquals(10,service.retirer(opt.get().getId(),2).getAvailablePoints());
+        Assertions.assertEquals(0,service.retirer(opt.get().getId(),15).getAvailablePoints());
     }
 
 
