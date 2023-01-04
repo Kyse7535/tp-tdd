@@ -18,7 +18,14 @@ public class DrivingLicencePointsService {
             throw new ResourceNotFoundException("permis non trouvé");
         }
         DrivingLicence new_licence = drivingLicence.get().withAvailablePoints(drivingLicence.get().getAvailablePoints()-nbr_points);
-        database.save(drivingLicence.get().getId(),drivingLicence.get());
-        return new_licence;
+        if (new_licence.getAvailablePoints() < 0) {
+            DrivingLicence new_licence2 = new_licence.withAvailablePoints(0);
+            database.save(new_licence2.getId(),new_licence2);
+            return new_licence2;
+        }
+        else {
+            database.save(new_licence.getId(),new_licence);
+            return new_licence;
+        }
     }
 }
